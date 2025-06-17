@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 using Zenject;
 
@@ -39,6 +40,8 @@ public class Enemy : MonoBehaviour, IDamageable
         _healthBar.HealthBarUpdate(_maxHealth, _currentHealth);
         if (_currentHealth <= 0)
         {
+            transform.DORotate(new Vector3(0, 0, -90f), 0.5f);
+
             _isDead = true;
             GetComponent<CapsuleCollider>().enabled = false;
             Destroy(gameObject, 1f);
