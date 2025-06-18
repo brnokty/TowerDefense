@@ -31,6 +31,7 @@ public class EnemySpawner : MonoBehaviour
                     Quaternion.identity,
                     null
                 );
+                enemy._data = data;
 
                 _container.Inject(enemy);
 

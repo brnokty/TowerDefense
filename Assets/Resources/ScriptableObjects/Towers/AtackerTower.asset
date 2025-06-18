@@ -15,6 +15,7 @@ MonoBehaviour:
   towerName: Gun Tower
   towerPrefab: {fileID: 5564737531901420564, guid: d202cda267fbaf64b9a41f6481a21c91, type: 3}
   towerType: 0
+  towerCost: 50
   fireRate: 1
   range: 5
   damage: 10

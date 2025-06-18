@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.AI;
@@ -5,7 +6,7 @@ using Zenject;
 
 public class Enemy : MonoBehaviour, IDamageable
 {
-    [Inject] private EnemyData _data;
+    [HideInInspector] public EnemyData _data;
     [Inject] private CoinManager _coinManager;
 
     private int _maxHealth;
@@ -20,7 +21,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private IEnemyBehavior _behavior;
     private NavMeshAgent _agent;
-    
+
     private WaveManager _waveManager;
 
     public void SetWaveManager(WaveManager manager)
@@ -96,5 +97,15 @@ public class Enemy : MonoBehaviour, IDamageable
         _slowTimer = duration;
 
         Debug.Log($"{gameObject.name} yavaşlatıldı: %{actualSlow * 100}");
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        //base
+        if (other.CompareTag("Base"))
+        {
+            // _waveManager?.NotifyBaseAttacked(); // 👈
+            Die();
+        }
     }
 }

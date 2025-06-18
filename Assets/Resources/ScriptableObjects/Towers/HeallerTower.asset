@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: HeallerTower
   m_EditorClassIdentifier: 
   towerName: Healler Tower
-  towerPrefab: {fileID: 5564737531901420564, guid: d202cda267fbaf64b9a41f6481a21c91, type: 3}
+  towerPrefab: {fileID: 5564737531901420564, guid: f08e19855ff47cb44962312ce694cf1f, type: 3}
   towerType: 1
+  towerCost: 50
   fireRate: 0
   range: 0
   damage: 0
   healAmount: 10
   healInterval: 2
-  slowDuration: 1
+  slowDuration: 0.5
   slowAmount: 0.5

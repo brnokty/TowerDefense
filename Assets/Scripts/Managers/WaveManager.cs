@@ -65,6 +65,7 @@ public class WaveManager : IInitializable
             _waveInProgress = false;
             Debug.Log($"🌪 Wave {CurrentWave} tamamlandı!");
 
+            
             _spawner.StartCoroutine(WaitAndStartNextWave());
         }
     }
@@ -72,6 +73,7 @@ public class WaveManager : IInitializable
     private IEnumerator WaitAndStartNextWave()
     {
         yield return new WaitForSeconds(2f);
-        StartNextWave();
+        // StartNextWave();
+        _towerManager.StartPlacementPhase();
     }
 }
