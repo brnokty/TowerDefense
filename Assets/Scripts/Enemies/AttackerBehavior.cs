@@ -1,17 +1,22 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class AttackerBehavior : IEnemyBehavior
 {
     private readonly Transform _enemyTransform;
+    private readonly Transform _target;
     private readonly float _speed;
+    private NavMeshAgent agent;
     private Tower _currentTarget;
     private float _attackCooldown = 1f;
     private float _timer;
 
-    public AttackerBehavior(Transform enemyTransform, float speed)
+    public AttackerBehavior(Transform enemyTransform,Transform target, float speed)
     {
         _enemyTransform = enemyTransform;
         _speed = speed;
+        _target = target;
+        agent= enemyTransform.GetComponent<NavMeshAgent>();
     }
 
     public void Tick()
@@ -45,7 +50,10 @@ public class AttackerBehavior : IEnemyBehavior
 
     private void MoveForward()
     {
-        _enemyTransform.position += _enemyTransform.forward * _speed * Time.deltaTime;
+        if (_target != null && agent.destination != _target.position)
+        {
+            agent.SetDestination(_target.position);
+        }
     }
 
     private void AttackTower()

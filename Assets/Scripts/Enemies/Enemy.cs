@@ -25,14 +25,14 @@ public class Enemy : MonoBehaviour, IDamageable
         }
         else
         {
-            _behavior = new AttackerBehavior(transform, _data.speed);
+            _behavior = new AttackerBehavior(transform, GameObject.FindWithTag("Base").transform, _data.speed);
         }
     }
 
     private void Update()
     {
         if (_isDead) return;
-        //_behavior?.Tick();
+        _behavior?.Tick();
     }
 
     public void TakeDamage(int amount)
@@ -46,7 +46,6 @@ public class Enemy : MonoBehaviour, IDamageable
             _isDead = true;
             GetComponent<CapsuleCollider>().enabled = false;
             GetComponent<NavMeshAgent>().enabled = false;
-            GetComponent<TestNav>().enabled = false;
             Destroy(gameObject, 1f);
         }
     }

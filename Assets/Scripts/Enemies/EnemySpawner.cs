@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using Zenject;
 
@@ -13,6 +14,12 @@ public class EnemySpawner : MonoBehaviour
     {
         int enemyCount = waveNumber * 3;
 
+        StartCoroutine(SpawnWaveCoroutine(enemyCount));
+        
+    }
+
+    private IEnumerator SpawnWaveCoroutine(int enemyCount)
+    {
         for (int i = 0; i < enemyCount; i++)
         {
             var spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
@@ -24,7 +31,7 @@ public class EnemySpawner : MonoBehaviour
                 null
             );
 
-            // enemy.SetTarget(targetPoint);
+            yield return new WaitForSeconds(0.7f);
             
         }
     }
