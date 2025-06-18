@@ -7,6 +7,7 @@ using Zenject;
 public class Enemy : MonoBehaviour, IDamageable
 {
     [HideInInspector] public EnemyData _data;
+    [SerializeField] private Animator _animator;
     [Inject] private CoinManager _coinManager;
 
     private int _maxHealth;
