@@ -705,6 +705,7 @@ MonoBehaviour:
   firePoint: {fileID: 7391848648567183360}
   maxHealth: 100
   damage: 10
+  _healthBar: {fileID: 8730464650318527416}
 --- !u!114 &8065847221991407228
 MonoBehaviour:
   m_ObjectHideFlags: 0
