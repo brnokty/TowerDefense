@@ -8,6 +8,7 @@ public class Tower : MonoBehaviour, IDamageable
     [SerializeField] private Transform firePoint;
     [SerializeField] private int maxHealth = 100;
     [SerializeField] private int damage = 10;
+    [SerializeField] private HealthBar _healthBar;
 
     private float _fireCooldown;
     private int _currentHealth;
@@ -63,6 +64,7 @@ public class Tower : MonoBehaviour, IDamageable
     public void TakeDamage(int amount)
     {
         _currentHealth -= amount;
+        _healthBar.HealthBarUpdate(maxHealth, _currentHealth);
         Debug.Log($"🏰 Kule hasar aldı: {_currentHealth}");
 
         if (_currentHealth <= 0)
