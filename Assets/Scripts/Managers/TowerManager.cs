@@ -4,15 +4,28 @@ using Zenject;
 public class TowerManager : ITickable
 {
     private readonly Camera _mainCamera;
-    private readonly GameObject _towerPrefab;
+    private readonly TowerData[] _towerDatas;
+    private readonly CoinManager _coinManager;
+    private readonly DiContainer _container;
+    [Inject] private WaveManager _waveManager;
+
+    private TowerData _selectedTowerData;
     private bool _canPlace = false;
     private float _placementTimer = 0f;
     private float _placementDuration = 5f;
 
-    public TowerManager([Inject(Id = "TowerPrefab")] GameObject towerPrefab)
+    public TowerManager(
+        TowerData[] towerDatas,
+        CoinManager coinManager,
+        DiContainer container
+    )
     {
-        _towerPrefab = towerPrefab;
+        _towerDatas = towerDatas;
+        _coinManager = coinManager;
+        _container = container;
         _mainCamera = Camera.main;
+
+        _selectedTowerData = _towerDatas[0]; // default shooter
     }
 
     public void StartPlacementPhase()
@@ -37,20 +50,46 @@ public class TowerManager : ITickable
             {
                 _canPlace = false;
                 Debug.Log("🔔 Kule yerleştirme süresi bitti");
+                _waveManager.StartNextWave();
             }
         }
     }
 
     private void TryPlaceTower()
     {
+        if (!_coinManager.CanAfford(_selectedTowerData.towerCost))
+        {
+            Debug.Log("🚫 Coin yetersiz.");
+            return;
+        }
+
         Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
             Vector3 position = hit.point;
             position.y = 0f;
 
-            ProjectContext.Instance.Container.InstantiatePrefab(_towerPrefab, position, Quaternion.identity, null);
-            Debug.Log($"🏰 Kule yerleştirildi: {position}");
+            var tower = _container.InstantiatePrefabForComponent<Tower>(
+                _selectedTowerData.towerPrefab,
+                position,
+                Quaternion.identity,
+                null
+            );
+            tower._data = _selectedTowerData;
+
+            _container.Inject(tower); // TowerData injection
+
+            _coinManager.Spend(_selectedTowerData.towerCost);
+            Debug.Log($"🏰 {_selectedTowerData.towerName} yerleştirildi: {position}");
+        }
+    }
+
+    public void SelectTower(int index)
+    {
+        if (index >= 0 && index < _towerDatas.Length)
+        {
+            _selectedTowerData = _towerDatas[index];
+            Debug.Log($"✅ Seçilen kule: {_selectedTowerData.towerName}");
         }
     }
 }

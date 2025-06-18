@@ -3,10 +3,12 @@ using Zenject;
 
 public class GameInstaller : MonoInstaller
 {
-    [SerializeField] private GameObject enemyPrefab;
+    [Header("Game Data")]
+    [SerializeField] private WaveData[] waves;
     [SerializeField] private GameObject projectilePrefab;
-    [SerializeField] private GameObject towerPrefab;
-
+    [SerializeField] private TowerData[] towerDatas;
+    
+    
     public override void InstallBindings()
     {
         // EnemyData 
@@ -17,9 +19,13 @@ public class GameInstaller : MonoInstaller
 
         // EnemySpawner
         Container.Bind<EnemySpawner>().FromComponentInHierarchy().AsSingle();
+        
+        // UIManager
+        Container.BindInterfacesAndSelfTo<UIManager>().AsSingle();
+        
+        // Wave datası
+        Container.Bind<WaveData[]>().FromInstance(waves).AsSingle();
 
-        // enemyPrefab 
-        Container.Bind<GameObject>().WithId("EnemyPrefab").FromInstance(enemyPrefab);
 
         // WaveManager
         Container.BindInterfacesAndSelfTo<WaveManager>().AsSingle();
@@ -28,15 +34,19 @@ public class GameInstaller : MonoInstaller
             .WithId("ProjectilePrefab")
             .FromInstance(projectilePrefab);
         // Tower prefab
-        Container.Bind<GameObject>()
-            .WithId("TowerPrefab")
-            .FromInstance(towerPrefab);
+        Container.Bind<TowerData[]>().FromInstance(towerDatas).AsSingle();
 
         // TowerManager
         Container.BindInterfacesAndSelfTo<TowerManager>().AsSingle();
         
-        // UIManager
-        Container.BindInterfacesAndSelfTo<UIManager>().AsSingle();
+        
+        
+        //CoinManager
+        Container.BindInterfacesAndSelfTo<CoinManager>().AsSingle();
+        
+        // InGamePanel
+        Container.Bind<InGamePanel>().FromComponentInHierarchy().AsSingle();
+
 
     }
 }

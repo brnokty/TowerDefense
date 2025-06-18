@@ -5,18 +5,17 @@ public class AttackerBehavior : IEnemyBehavior
 {
     private readonly Transform _enemyTransform;
     private readonly Transform _target;
-    private readonly float _speed;
-    private NavMeshAgent agent;
+    private readonly NavMeshAgent _agent;
+
     private Tower _currentTarget;
     private float _attackCooldown = 1f;
     private float _timer;
 
-    public AttackerBehavior(Transform enemyTransform,Transform target, float speed)
+    public AttackerBehavior(Transform enemyTransform, Transform target, NavMeshAgent agent)
     {
         _enemyTransform = enemyTransform;
-        _speed = speed;
         _target = target;
-        agent= enemyTransform.GetComponent<NavMeshAgent>();
+        _agent = agent;
     }
 
     public void Tick()
@@ -26,7 +25,7 @@ public class AttackerBehavior : IEnemyBehavior
         if (_currentTarget == null)
         {
             TryFindTower();
-            MoveForward();
+            MoveToBase();
         }
         else
         {
@@ -48,19 +47,17 @@ public class AttackerBehavior : IEnemyBehavior
         }
     }
 
-    private void MoveForward()
+    private void MoveToBase()
     {
-        if (_target != null && agent.destination != _target.position)
+        if (_target != null && _agent.destination != _target.position)
         {
-            agent.SetDestination(_target.position);
+            _agent.SetDestination(_target.position);
         }
     }
 
     private void AttackTower()
     {
-        if (_currentTarget == null) return;
-
-        if (_timer <= 0f)
+        if (_timer <= 0f && _currentTarget != null)
         {
             _currentTarget.TakeDamage(10);
             _timer = _attackCooldown;

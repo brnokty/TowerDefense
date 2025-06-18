@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3af6f058a67aac42b1aa45ae3aa5979, type: 3}
   m_Name: Atacker
   m_EditorClassIdentifier: 
+  enemyPrefab: {fileID: 8473266845132542742, guid: 5f31887ffd4acd74b9b185e4d56f19d2, type: 3}
   speed: 3
   health: 50
+  reward: 50
   type: 1
+  slowSensitivity: 1
+  slowDuration: 1

@@ -7,32 +7,37 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private Transform[] spawnPoints;
     [SerializeField] private Transform targetPoint;
 
-    [Inject] private EnemyData _enemyData;
-    [Inject(Id = "EnemyPrefab")] private GameObject _enemyPrefab;
+    [Inject] private DiContainer _container;
 
-    public void SpawnWave(int waveNumber)
+    public void SpawnWave(WaveData waveData, WaveManager manager)
     {
-        int enemyCount = waveNumber * 3;
-
-        StartCoroutine(SpawnWaveCoroutine(enemyCount));
-        
+        StartCoroutine(SpawnWaveCoroutine(waveData, manager));
     }
 
-    private IEnumerator SpawnWaveCoroutine(int enemyCount)
+    private IEnumerator SpawnWaveCoroutine(WaveData waveData, WaveManager manager)
     {
-        for (int i = 0; i < enemyCount; i++)
+        for (int i = 0; i < waveData.enemyTypes.Length; i++)
         {
-            var spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
+            EnemyData data = waveData.enemyTypes[i];
+            int count = waveData.enemyCounts[i];
 
-            var enemy = ProjectContext.Instance.Container.InstantiatePrefabForComponent<Enemy>(
-                _enemyPrefab,
-                spawnPoint.position,
-                Quaternion.identity,
-                null
-            );
+            for (int j = 0; j < count; j++)
+            {
+                var spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
 
-            yield return new WaitForSeconds(0.7f);
-            
+                var enemy = _container.InstantiatePrefabForComponent<Enemy>(
+                    data.enemyPrefab,
+                    spawnPoint.position,
+                    Quaternion.identity,
+                    null
+                );
+
+                _container.Inject(enemy);
+
+                enemy.SetWaveManager(manager); // Enemy’ye WaveManager verilir
+
+                yield return new WaitForSeconds(waveData.spawnDelay);
+            }
         }
     }
 }

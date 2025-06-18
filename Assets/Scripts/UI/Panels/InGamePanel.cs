@@ -1,31 +1,18 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
+using TMPro;
 
 public class InGamePanel : Panel
 {
-    [SerializeField] private TextMeshProUGUI _waveText;
-    [SerializeField] private TextMeshProUGUI _coinText;
+    [SerializeField] private TextMeshProUGUI coinText;
+    [SerializeField] private TextMeshProUGUI waveText;
 
-    private int _wave = 1;
-
-    protected override void Start()
+    public void UpdateCoin(int amount)
     {
-        base.Start();
-        UpdateWaveText();
+        coinText.text = amount.ToString();
     }
 
-    public void SetWave(int wave)
+    public void UpdateWave(int wave)
     {
-        _wave = wave;
-        UpdateWaveText();
-    }
-
-
-    private void UpdateWaveText()
-    {
-        _waveText.text = _wave.ToString();
+        waveText.text =  wave.ToString();
     }
 }

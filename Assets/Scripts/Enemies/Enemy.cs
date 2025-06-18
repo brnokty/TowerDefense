@@ -6,47 +6,95 @@ using Zenject;
 public class Enemy : MonoBehaviour, IDamageable
 {
     [Inject] private EnemyData _data;
+    [Inject] private CoinManager _coinManager;
+
     private int _maxHealth;
     private int _currentHealth;
     private bool _isDead;
+
+    private float _originalSpeed;
+    private float _currentSpeed;
+    private float _slowTimer;
+
     [SerializeField] private HealthBar _healthBar;
 
     private IEnemyBehavior _behavior;
+    private NavMeshAgent _agent;
+    
+    private WaveManager _waveManager;
+
+    public void SetWaveManager(WaveManager manager)
+    {
+        _waveManager = manager;
+    }
 
     private void Start()
     {
-        _currentHealth = _data.health;
-        _maxHealth = _data.health;
+        _agent = GetComponent<NavMeshAgent>();
+        _currentHealth = _maxHealth = _data.health;
 
+        _originalSpeed = _data.speed;
+        _currentSpeed = _originalSpeed;
+        _agent.speed = _currentSpeed;
 
-        if (_data.type == EnemyType.Runner)
-        {
-            _behavior = new RunnerBehavior(transform, GameObject.FindWithTag("Base").transform, _data.speed);
-        }
-        else
-        {
-            _behavior = new AttackerBehavior(transform, GameObject.FindWithTag("Base").transform, _data.speed);
-        }
+        var baseTarget = GameObject.FindWithTag("Base").transform;
+
+        _behavior = _data.type == EnemyType.Runner
+            ? new RunnerBehavior(transform, baseTarget, _agent)
+            : new AttackerBehavior(transform, baseTarget, _agent);
     }
 
     private void Update()
     {
         if (_isDead) return;
+
         _behavior?.Tick();
+
+        // slow etkisi bitti mi?
+        if (_slowTimer > 0)
+        {
+            _slowTimer -= Time.deltaTime;
+            if (_slowTimer <= 0)
+            {
+                _currentSpeed = _originalSpeed;
+                _agent.speed = _currentSpeed;
+            }
+        }
     }
 
     public void TakeDamage(int amount)
     {
         _currentHealth -= amount;
         _healthBar.HealthBarUpdate(_maxHealth, _currentHealth);
+
         if (_currentHealth <= 0)
         {
-            transform.DORotate(new Vector3(0, 0, -90f), 0.5f);
-
-            _isDead = true;
-            GetComponent<CapsuleCollider>().enabled = false;
-            GetComponent<NavMeshAgent>().enabled = false;
-            Destroy(gameObject, 1f);
+            Die();
         }
+    }
+
+    private void Die()
+    {
+        _isDead = true;
+        _coinManager.Earn(_data.reward);
+
+        _agent.enabled = false;
+        GetComponent<CapsuleCollider>().enabled = false;
+        transform.DORotate(new Vector3(0, 0, -90f), 0.5f);
+
+        _waveManager?.NotifyEnemyKilled(); // 👈
+
+        Destroy(gameObject, 1f);
+    }
+
+
+    public void ApplySlow(float slowPercent, float duration)
+    {
+        float actualSlow = slowPercent * _data.slowSensitivity;
+        _currentSpeed = _originalSpeed * (1f - actualSlow);
+        _agent.speed = _currentSpeed;
+        _slowTimer = duration;
+
+        Debug.Log($"{gameObject.name} yavaşlatıldı: %{actualSlow * 100}");
     }
 }

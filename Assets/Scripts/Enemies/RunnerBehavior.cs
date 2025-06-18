@@ -3,27 +3,20 @@ using UnityEngine.AI;
 
 public class RunnerBehavior : IEnemyBehavior
 {
-    private readonly Transform _enemyTransform;
     private readonly Transform _target;
-    private readonly float _speed;
-    private NavMeshAgent agent;
+    private readonly NavMeshAgent _agent;
 
-    public RunnerBehavior(Transform enemyTransform, Transform target, float speed)
+    public RunnerBehavior(Transform enemyTransform, Transform target, NavMeshAgent agent)
     {
-        _enemyTransform = enemyTransform;
         _target = target;
-        _speed = speed;
-        agent= enemyTransform.GetComponent<NavMeshAgent>();
+        _agent = agent;
     }
 
     public void Tick()
     {
-        if (_target == null) return;
-        
-        
-        if (_target != null && agent.destination != _target.position)
+        if (_target != null && _agent.destination != _target.position)
         {
-            agent.SetDestination(_target.position);
+            _agent.SetDestination(_target.position);
         }
     }
 }

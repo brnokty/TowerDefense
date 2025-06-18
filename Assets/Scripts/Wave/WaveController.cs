@@ -4,31 +4,38 @@ using Zenject;
 
 public class WaveController : MonoBehaviour
 {
-    private WaveManager _waveManager;
+    [Inject] private WaveManager _waveManager;
     [Inject] private TowerManager _towerManager;
-    [Inject] private UIManager _uiManager;
 
-    [Inject]
-    public void Construct(WaveManager waveManager)
+    private void Start()
     {
-        _waveManager = waveManager;
-        StartCoroutine(SpawnWavesRoutine());
+        StartCoroutine(GameLoop());
     }
 
-    private IEnumerator SpawnWavesRoutine()
+    private IEnumerator GameLoop()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1f); // İlk geçiş için bekleme
 
         while (!_waveManager.AllWavesCompleted)
         {
+            // 5 saniyelik kule yerleştirme süresi
             _towerManager.StartPlacementPhase();
+            Debug.Log("🛠 Yerleştirme süresi başladı");
+
             yield return new WaitForSeconds(5f);
 
+            // Wave başlasın
             _waveManager.StartNextWave();
-            _uiManager._inGamePanel.SetWave(_waveManager._currentWave);
-            yield return new WaitForSeconds(10f);
+
+            // Bekleme waveManager'da yapılır (hepsi ölene kadar)
+            while (_waveManager.IsWaveInProgress)
+            {
+                yield return null;
+            }
+
+            yield return new WaitForSeconds(2f); // İsteğe bağlı wave arası bekleme
         }
 
-        Debug.Log("🎉 Tüm düşman dalgaları tamamlandı!");
+        Debug.Log("🏁 Oyun tamamlandı!");
     }
 }

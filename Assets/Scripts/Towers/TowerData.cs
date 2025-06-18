@@ -1,18 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class TowerData : MonoBehaviour
+[CreateAssetMenu(menuName = "Data/TowerData")]
+public class TowerData : ScriptableObject
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public string towerName;
+    public GameObject towerPrefab;
+    public TowerType towerType;
+    public int towerCost;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [Header("Combat Tower")]
+    public float fireRate;
+    public float range;
+    public int damage;
+
+    [Header("Support Tower")]
+    public float healAmount;
+    public float healInterval;
+    public float slowDuration;
+    public float slowAmount;
+}
+
+public enum TowerType
+{
+    Shooter,
+    Support
 }
