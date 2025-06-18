@@ -772,7 +772,7 @@ GameObject:
   - component: {fileID: 993369344}
   - component: {fileID: 993369343}
   m_Layer: 5
-  m_Name: Wave (1)
+  m_Name: WaveBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1854,7 +1854,7 @@ GameObject:
   - component: {fileID: 2079050909}
   - component: {fileID: 2079050908}
   m_Layer: 5
-  m_Name: IngamePanel
+  m_Name: InGamePanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1926,14 +1926,15 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2079050904}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6e06e5829828ff940bdec181c6eca48c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   appearTime: 0
   disappearTime: 0
-  _waveText: {fileID: 900726651}
+  _waveText: {fileID: 2021839631}
+  _coinText: {fileID: 0}
 --- !u!225 &2079050909
 CanvasGroup:
   m_ObjectHideFlags: 0

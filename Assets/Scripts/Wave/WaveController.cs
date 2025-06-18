@@ -6,6 +6,7 @@ public class WaveController : MonoBehaviour
 {
     private WaveManager _waveManager;
     [Inject] private TowerManager _towerManager;
+    [Inject] private UIManager _uiManager;
 
     [Inject]
     public void Construct(WaveManager waveManager)
@@ -24,6 +25,7 @@ public class WaveController : MonoBehaviour
             yield return new WaitForSeconds(5f);
 
             _waveManager.StartNextWave();
+            _uiManager._inGamePanel.SetWave(_waveManager._currentWave);
             yield return new WaitForSeconds(10f);
         }
 

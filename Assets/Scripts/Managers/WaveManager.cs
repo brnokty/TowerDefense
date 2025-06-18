@@ -6,11 +6,11 @@ public class WaveManager : IInitializable
 {
     private readonly EnemySpawner _enemySpawner;
     private readonly DiContainer _container;
-
-    private int _currentWave = 0;
+    [HideInInspector] public int _currentWave = 0;
     private int _totalWaves = 3;
 
     private float _timeBetweenWaves = 5f;
+
     [Inject]
     public WaveManager(EnemySpawner enemySpawner, DiContainer container)
     {

@@ -7,16 +7,16 @@ using UnityEngine;
 public class InGamePanel : Panel
 {
     [SerializeField] private TextMeshProUGUI _waveText;
+    [SerializeField] private TextMeshProUGUI _coinText;
 
     private int _wave = 1;
-    private int _availableTowers = 3;
-    
+
     protected override void Start()
     {
         base.Start();
         UpdateWaveText();
     }
-    
+
     public void SetWave(int wave)
     {
         _wave = wave;
@@ -24,9 +24,8 @@ public class InGamePanel : Panel
     }
 
 
-
     private void UpdateWaveText()
     {
-        _waveText.text = $"Wave: {_wave}";
+        _waveText.text = _wave.ToString();
     }
 }
