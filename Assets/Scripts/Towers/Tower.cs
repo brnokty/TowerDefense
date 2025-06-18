@@ -7,6 +7,7 @@ public class Tower : MonoBehaviour, IDamageable
     [SerializeField] private float fireRate = 1f;
     [SerializeField] private Transform firePoint;
     [SerializeField] private int maxHealth = 100;
+    [SerializeField] private int damage = 10;
 
     private float _fireCooldown;
     private int _currentHealth;
@@ -56,7 +57,7 @@ public class Tower : MonoBehaviour, IDamageable
             null
         );
 
-        projectile.SetTarget(target);
+        projectile.SetProjectile(target, damage, 10f);
     }
 
     public void TakeDamage(int amount)

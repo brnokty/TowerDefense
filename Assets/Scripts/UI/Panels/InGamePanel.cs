@@ -7,7 +7,6 @@ using UnityEngine;
 public class InGamePanel : Panel
 {
     [SerializeField] private TextMeshProUGUI _waveText;
-    [SerializeField] private TextMeshProUGUI _towerCountText;
 
     private int _wave = 1;
     private int _availableTowers = 3;
@@ -16,7 +15,6 @@ public class InGamePanel : Panel
     {
         base.Start();
         UpdateWaveText();
-        UpdateTowerText();
     }
     
     public void SetWave(int wave)
@@ -25,19 +23,10 @@ public class InGamePanel : Panel
         UpdateWaveText();
     }
 
-    public void SetAvailableTowers(int count)
-    {
-        _availableTowers = count;
-        UpdateTowerText();
-    }
+
 
     private void UpdateWaveText()
     {
         _waveText.text = $"Wave: {_wave}";
-    }
-
-    private void UpdateTowerText()
-    {
-        _towerCountText.text = $"Towers: {_availableTowers}";
     }
 }

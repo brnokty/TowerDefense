@@ -1,5 +1,6 @@
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.AI;
 using Zenject;
 
 public class Enemy : MonoBehaviour, IDamageable
@@ -17,7 +18,7 @@ public class Enemy : MonoBehaviour, IDamageable
         _currentHealth = _data.health;
         _maxHealth = _data.health;
 
-        
+
         if (_data.type == EnemyType.Runner)
         {
             _behavior = new RunnerBehavior(transform, GameObject.FindWithTag("Base").transform, _data.speed);
@@ -31,7 +32,7 @@ public class Enemy : MonoBehaviour, IDamageable
     private void Update()
     {
         if (_isDead) return;
-        _behavior?.Tick();
+        //_behavior?.Tick();
     }
 
     public void TakeDamage(int amount)
@@ -44,6 +45,8 @@ public class Enemy : MonoBehaviour, IDamageable
 
             _isDead = true;
             GetComponent<CapsuleCollider>().enabled = false;
+            GetComponent<NavMeshAgent>().enabled = false;
+            GetComponent<TestNav>().enabled = false;
             Destroy(gameObject, 1f);
         }
     }

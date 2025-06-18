@@ -11,7 +11,7 @@ public class EnemySpawner : MonoBehaviour
 
     public void SpawnWave(int waveNumber)
     {
-        int enemyCount = 1;//waveNumber * 3;
+        int enemyCount = waveNumber * 3;
 
         for (int i = 0; i < enemyCount; i++)
         {
