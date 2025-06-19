@@ -7,7 +7,7 @@ using Zenject;
 public class Enemy : MonoBehaviour, IDamageable
 {
     [HideInInspector] public EnemyData _data;
-    [SerializeField] private Animator _animator;
+    public Animator _animator;
     [Inject] private CoinManager _coinManager;
 
     private int _maxHealth;
@@ -20,12 +20,12 @@ public class Enemy : MonoBehaviour, IDamageable
 
     [SerializeField] private HealthBar _healthBar;
 
-    private IEnemyBehavior _behavior;
+    [HideInInspector] public IEnemyBehavior _behavior;
     private NavMeshAgent _agent;
 
     private WaveManager _waveManager;
-    
-    [Inject(Id = "EnemyProjectilePrefab")] private GameObject _projectilePrefab;
+
+    [Inject(Id = "ProjectilePrefab")] private GameObject _projectilePrefab;
     public GameObject ProjectilePrefab => _projectilePrefab;
 
     public void SetWaveManager(WaveManager manager)
@@ -109,6 +109,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
         Debug.Log($"{gameObject.name} yavaşlatıldı: %{actualSlow * 100}");
     }
+    
 
     private void OnTriggerEnter(Collider other)
     {

@@ -3,6 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Data/TowerData")]
 public class TowerData : ScriptableObject
 {
+    public int towerIndex;
     public string towerName;
     public Sprite towerSprite;
     public GameObject towerPrefab;

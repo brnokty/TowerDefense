@@ -63,8 +63,12 @@ public class Tower : MonoBehaviour, IDamageable
             Quaternion.identity,
             null
         );
+        
+        int projectileEffectIndex = 0;
+        if (_data.towerIndex == 1)
+            projectileEffectIndex = 1; // İkinci kule için farklı efekt
 
-        projectile.SetProjectile(target, _data.damage, 10f);
+        projectile.SetProjectile(target, _data.damage, 10f, projectileEffectIndex);
     }
 
     private void HandleSupport()

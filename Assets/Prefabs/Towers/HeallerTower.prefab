@@ -665,6 +665,7 @@ GameObject:
   - component: {fileID: 7631272800836638466}
   - component: {fileID: 8065847221991407228}
   - component: {fileID: 7703320483621601659}
+  - component: {fileID: 1426523034971630511}
   m_Layer: 0
   m_Name: HeallerTower
   m_TagString: Untagged
@@ -735,6 +736,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 65464542896376979, guid: 44b6be8e7b544564984c408149a5b27f, type: 3}
+--- !u!136 &1426523034971630511
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5564737531901420564}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 3.9080856
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.885655, z: 0}
 --- !u!1 &6541202594472663692
 GameObject:
   m_ObjectHideFlags: 0

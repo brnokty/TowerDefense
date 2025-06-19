@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e281079b29037d4c8a7cd7de7be93b4, type: 3}
   m_Name: HeallerTower
   m_EditorClassIdentifier: 
+  towerIndex: 2
   towerName: Healler Tower
   towerSprite: {fileID: 21300000, guid: 6a3c39f078b44db40b4b0051840dca74, type: 3}
   towerPrefab: {fileID: 5564737531901420564, guid: f08e19855ff47cb44962312ce694cf1f, type: 3}

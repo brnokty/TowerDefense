@@ -8,10 +8,13 @@ public class EnemyData : ScriptableObject
     public int health;
     public int reward; // Öldüğünde vereceği coin
     public EnemyType type;
+    
+    [Header("Attacker Özellikleri")]
+    public float attackRange = 1.5f; 
+    public float attackRate = 1f; 
 
     [Header("Support Tower Etkileri")]
     public float slowSensitivity = 1f;    // 1 = tam etkilenir, 0.5 = %50 etkilenir
-    public float slowDuration = 1f;       // yavaşlatma süresi
 }
 
 

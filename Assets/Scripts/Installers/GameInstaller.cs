@@ -6,7 +6,6 @@ public class GameInstaller : MonoInstaller
     [Header("Game Data")]
     [SerializeField] private WaveData[] waves;
     [SerializeField] private GameObject projectilePrefab;
-    [SerializeField] private GameObject enemyProjectilePrefab;
     [SerializeField] private TowerData[] towerDatas;
     
     
@@ -35,10 +34,6 @@ public class GameInstaller : MonoInstaller
             .WithId("ProjectilePrefab")
             .FromInstance(projectilePrefab);
         
-        // EnemyProjectile prefab
-        Container.Bind<GameObject>()
-            .WithId("EnemyProjectilePrefab")
-            .FromInstance(enemyProjectilePrefab);
         // Tower prefab
         Container.Bind<TowerData[]>().FromInstance(towerDatas).AsSingle();
 

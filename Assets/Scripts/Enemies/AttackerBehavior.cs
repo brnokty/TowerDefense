@@ -21,36 +21,51 @@ public class AttackerBehavior : IEnemyBehavior
         _agent = agent;
 
         _enemy = enemyTransform.GetComponent<Enemy>();
-        _container = ProjectContext.Instance.Container; // Zenject erişimi
+        _attackCooldown=_enemy._data.attackRate;
+        _container = ProjectContext.Instance.Container;
     }
+    
 
     public void Tick()
     {
         _timer -= Time.deltaTime;
 
-        if (_currentTarget == null)
+        if (_currentTarget == null || !_currentTarget.gameObject.activeInHierarchy)
         {
+            _currentTarget = null;
+            _agent.isStopped = false;
             TryFindTower();
             MoveToBase();
         }
         else
         {
+            // Kule hâlâ hayattaysa
+            if (!_agent.isStopped)
+            {
+                _agent.isStopped = true;
+                _agent.ResetPath();
+            }
+
             AttackTower();
         }
 
-        bool isMoving = _agent.velocity.magnitude > 0.1f;
+        bool isMoving = !_agent.isStopped && _agent.velocity.magnitude > 0.1f;
         _enemy.SetWalkAnimation(isMoving);
     }
 
+
     private void TryFindTower()
     {
-        Collider[] hits = Physics.OverlapSphere(_enemyTransform.position, 2f);
+        Collider[] hits = Physics.OverlapSphere(_enemyTransform.position, _enemy._data.attackRange);
         foreach (var hit in hits)
         {
             Tower tower = hit.GetComponent<Tower>();
             if (tower != null)
             {
                 _currentTarget = tower;
+                _agent.isStopped = true;
+                _agent.ResetPath();
+                Debug.Log($"🔍 Kule bulundu: {_currentTarget.name}");
                 break;
             }
         }
@@ -66,24 +81,56 @@ public class AttackerBehavior : IEnemyBehavior
 
     private void AttackTower()
     {
-        if (_timer <= 0f && _currentTarget != null)
+        if (_currentTarget == null) return;
+
+        // Kuleye yönel
+        Vector3 direction = _currentTarget.transform.position - _enemyTransform.position;
+        direction.y = 0f;
+
+        _enemy.transform.LookAt(direction);
+        if (direction != Vector3.zero)
         {
-            FireProjectile(_currentTarget.transform);
-            _timer = _attackCooldown;
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+            _enemyTransform.rotation = Quaternion.Slerp(_enemyTransform.rotation, targetRotation, Time.deltaTime * 5f);
+        }
+
+        if (_timer <= 0f)
+        {
+            _enemy._animator.SetTrigger("Attack");
+            _timer = _attackCooldown; // tekrar başlat
         }
     }
 
+       
+    
+
     private void FireProjectile(Transform target)
     {
-        var projectilePrefab = _enemy.ProjectilePrefab; // Enemy'den prefab referansı alınır
+        var projectilePrefab = _enemy.ProjectilePrefab;
 
         var projectile = _container.InstantiatePrefabForComponent<Projectile>(
             projectilePrefab,
-            _enemyTransform.position + Vector3.up * 1f, // elinden veya ortadan çıksın
+            _enemyTransform.position + Vector3.up * 1f,
             Quaternion.identity,
             null
         );
 
-        projectile.SetProjectile(target, 10, 3f);
+        projectile.SetProjectile(target, 10, 3f, 2);
+    }
+
+    public void FireProjectileFrom(Vector3 spawnPosition)
+    {
+        if (_currentTarget == null) return;
+
+        var projectilePrefab = _enemy.ProjectilePrefab;
+
+        var projectile = _container.InstantiatePrefabForComponent<Projectile>(
+            projectilePrefab,
+            spawnPosition,
+            Quaternion.identity,
+            null
+        );
+
+        projectile.SetProjectile(_currentTarget.transform, 10, 3f, 2);
     }
 }

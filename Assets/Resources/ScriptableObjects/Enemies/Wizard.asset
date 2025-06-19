@@ -17,5 +17,6 @@ MonoBehaviour:
   health: 50
   reward: 50
   type: 1
+  attackRange: 5
+  attackRate: 1
   slowSensitivity: 1
-  slowDuration: 1
