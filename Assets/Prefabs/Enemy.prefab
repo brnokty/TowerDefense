@@ -401,6 +401,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _data: {fileID: 0}
+  _animator: {fileID: 5346820332320256234}
   _healthBar: {fileID: 1263053995552405877}
 --- !u!114 &-8468810303335500991
 MonoBehaviour:
@@ -649,5 +650,10 @@ PrefabInstance:
 --- !u!4 &2077166683892820624 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c5ae65e3e189239409bef3bd0aba8a98, type: 3}
+  m_PrefabInstance: {fileID: 1970656247422668155}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &5346820332320256234 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: c5ae65e3e189239409bef3bd0aba8a98, type: 3}
   m_PrefabInstance: {fileID: 1970656247422668155}
   m_PrefabAsset: {fileID: 0}

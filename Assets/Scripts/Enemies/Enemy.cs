@@ -77,12 +77,13 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private void Die()
     {
+        _animator.SetTrigger("Die");
         _isDead = true;
         _coinManager.Earn(_data.reward);
 
         _agent.enabled = false;
         GetComponent<CapsuleCollider>().enabled = false;
-        transform.DORotate(new Vector3(0, 0, -90f), 0.5f);
+        // transform.DORotate(new Vector3(0, 0, -90f), 0.5f);
 
         _waveManager?.NotifyEnemyKilled(); // 👈
 
