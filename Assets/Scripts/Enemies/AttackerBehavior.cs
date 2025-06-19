@@ -1,11 +1,14 @@
 using UnityEngine;
 using UnityEngine.AI;
+using Zenject;
 
 public class AttackerBehavior : IEnemyBehavior
 {
     private readonly Transform _enemyTransform;
     private readonly Transform _target;
     private readonly NavMeshAgent _agent;
+    private readonly Enemy _enemy;
+    private readonly DiContainer _container;
 
     private Tower _currentTarget;
     private float _attackCooldown = 1f;
@@ -16,6 +19,9 @@ public class AttackerBehavior : IEnemyBehavior
         _enemyTransform = enemyTransform;
         _target = target;
         _agent = agent;
+
+        _enemy = enemyTransform.GetComponent<Enemy>();
+        _container = ProjectContext.Instance.Container; // Zenject erişimi
     }
 
     public void Tick()
@@ -31,6 +37,9 @@ public class AttackerBehavior : IEnemyBehavior
         {
             AttackTower();
         }
+
+        bool isMoving = _agent.velocity.magnitude > 0.1f;
+        _enemy.SetWalkAnimation(isMoving);
     }
 
     private void TryFindTower()
@@ -59,8 +68,22 @@ public class AttackerBehavior : IEnemyBehavior
     {
         if (_timer <= 0f && _currentTarget != null)
         {
-            _currentTarget.TakeDamage(10);
+            FireProjectile(_currentTarget.transform);
             _timer = _attackCooldown;
         }
+    }
+
+    private void FireProjectile(Transform target)
+    {
+        var projectilePrefab = _enemy.ProjectilePrefab; // Enemy'den prefab referansı alınır
+
+        var projectile = _container.InstantiatePrefabForComponent<Projectile>(
+            projectilePrefab,
+            _enemyTransform.position + Vector3.up * 1f, // elinden veya ortadan çıksın
+            Quaternion.identity,
+            null
+        );
+
+        projectile.SetProjectile(target, 10, 3f);
     }
 }

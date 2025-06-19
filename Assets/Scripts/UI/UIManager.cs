@@ -21,4 +21,9 @@ public class UIManager : IInitializable
     {
         _inGamePanel.UpdateWave(wave);
     }
+
+    public void SetSelectedTower(int towerIndex)
+    {
+        _inGamePanel.SetSelectedTower(towerIndex);
+    }
 }

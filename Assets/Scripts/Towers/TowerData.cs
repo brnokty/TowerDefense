@@ -4,6 +4,7 @@ using UnityEngine;
 public class TowerData : ScriptableObject
 {
     public string towerName;
+    public Sprite towerSprite;
     public GameObject towerPrefab;
     public TowerType towerType;
     public int towerCost;

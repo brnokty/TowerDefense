@@ -24,6 +24,9 @@ public class Enemy : MonoBehaviour, IDamageable
     private NavMeshAgent _agent;
 
     private WaveManager _waveManager;
+    
+    [Inject(Id = "EnemyProjectilePrefab")] private GameObject _projectilePrefab;
+    public GameObject ProjectilePrefab => _projectilePrefab;
 
     public void SetWaveManager(WaveManager manager)
     {
@@ -74,6 +77,12 @@ public class Enemy : MonoBehaviour, IDamageable
             Die();
         }
     }
+
+    public void SetWalkAnimation(bool walking)
+    {
+        _animator.SetBool("Walk", walking);
+    }
+
 
     private void Die()
     {

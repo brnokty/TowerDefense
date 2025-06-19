@@ -32,6 +32,7 @@ public class EnemySpawner : MonoBehaviour
                     null
                 );
                 enemy._data = data;
+                enemy.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
 
                 _container.Inject(enemy);
 

@@ -223,7 +223,7 @@ GameObject:
   - component: {fileID: 4216718277381489562}
   - component: {fileID: 9047810685788523354}
   m_Layer: 5
-  m_Name: TowerNameText (TMP)
+  m_Name: TowerCostText (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -357,6 +357,7 @@ GameObject:
   - component: {fileID: 66252845252841762}
   - component: {fileID: 1442900469881188129}
   - component: {fileID: 8806582422675121384}
+  - component: {fileID: 7747663361966878326}
   m_Layer: 5
   m_Name: TowerButton
   m_TagString: Untagged
@@ -467,7 +468,35 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1442900469881188129}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7747663361966878326}
+        m_TargetAssemblyTypeName: TowerButton, Assembly-CSharp
+        m_MethodName: ButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &7747663361966878326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3823065219524593540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eefd6476d7122d24e8a1648b6e99aaf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerIndex: 0
+  towerImage: {fileID: 6069271201960634351}
+  towerCostText: {fileID: 9047810685788523354}
+  toverNameText: {fileID: 1955116172281436871}
 --- !u!1 &4057185433309949318
 GameObject:
   m_ObjectHideFlags: 0

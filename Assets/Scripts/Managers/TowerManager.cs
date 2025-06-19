@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using Zenject;
 
 public class TowerManager : ITickable
@@ -57,18 +58,35 @@ public class TowerManager : ITickable
 
     private void TryPlaceTower()
     {
+        // Eğer UI üzerine tıklanmışsa hiçbir şey yapma
+        if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
+        {
+            Debug.Log("⚠️ UI öğesi tıklanmış, kule yerleştirilemez.");
+            return;
+        }
+
+        // Para kontrolü
         if (!_coinManager.CanAfford(_selectedTowerData.towerCost))
         {
             Debug.Log("🚫 Coin yetersiz.");
             return;
         }
 
+        // Raycast işlemi
         Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
+            // Sadece "Platform" tagli objelere yerleştirilsin
+            if (hit.collider.tag != "Platform")
+            {
+                Debug.Log("⛔ Platform dışında bir yere tıklanmış.");
+                return;
+            }
+
             Vector3 position = hit.point;
             position.y = 0f;
 
+            // Kule instantiate et
             var tower = _container.InstantiatePrefabForComponent<Tower>(
                 _selectedTowerData.towerPrefab,
                 position,
@@ -77,8 +95,9 @@ public class TowerManager : ITickable
             );
             tower._data = _selectedTowerData;
 
-            _container.Inject(tower); // TowerData injection
+            _container.Inject(tower); // Inject işlemi
 
+            // Para harcama
             _coinManager.Spend(_selectedTowerData.towerCost);
             Debug.Log($"🏰 {_selectedTowerData.towerName} yerleştirildi: {position}");
         }

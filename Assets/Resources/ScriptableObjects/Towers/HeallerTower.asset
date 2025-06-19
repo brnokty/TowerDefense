@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: HeallerTower
   m_EditorClassIdentifier: 
   towerName: Healler Tower
+  towerSprite: {fileID: 21300000, guid: 6a3c39f078b44db40b4b0051840dca74, type: 3}
   towerPrefab: {fileID: 5564737531901420564, guid: f08e19855ff47cb44962312ce694cf1f, type: 3}
   towerType: 1
   towerCost: 50
