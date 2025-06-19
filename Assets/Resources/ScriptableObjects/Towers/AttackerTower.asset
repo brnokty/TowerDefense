@@ -12,13 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e281079b29037d4c8a7cd7de7be93b4, type: 3}
   m_Name: AttackerTower
   m_EditorClassIdentifier: 
+  towerIndex: 0
   towerName: Gun Tower
   towerSprite: {fileID: 21300000, guid: d151d8cb14dc8434f9ed96d32d4ebe91, type: 3}
   towerPrefab: {fileID: 5564737531901420564, guid: d202cda267fbaf64b9a41f6481a21c91, type: 3}
   towerType: 0
   towerCost: 50
+  towerRange: 5
   fireRate: 1
-  range: 5
   damage: 10
   healAmount: 0
   healInterval: 0

@@ -1,9 +1,11 @@
+using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
 public class Tower : MonoBehaviour, IDamageable
 {
     [SerializeField] private Transform firePoint;
+    [SerializeField] private Transform rangeTransform;
     [SerializeField] private HealthBar _healthBar;
 
     [HideInInspector] public TowerData _data;
@@ -12,10 +14,12 @@ public class Tower : MonoBehaviour, IDamageable
     private float _fireCooldown;
     private float _healCooldown;
     private int _currentHealth;
+    [SerializeField] private List<ParticleSystem> _effects;
 
     private void Start()
     {
         _currentHealth = 100;
+        rangeTransform.localScale = Vector3.one * 2 * _data.towerRange;
     }
 
     private void Update()
@@ -30,7 +34,7 @@ public class Tower : MonoBehaviour, IDamageable
     {
         _fireCooldown -= Time.deltaTime;
 
-        Collider[] hits = Physics.OverlapSphere(transform.position, _data.range);
+        Collider[] hits = Physics.OverlapSphere(transform.position, _data.towerRange);
 
         Enemy closestEnemy = null;
         float closestDistance = Mathf.Infinity;
@@ -63,7 +67,7 @@ public class Tower : MonoBehaviour, IDamageable
             Quaternion.identity,
             null
         );
-        
+
         int projectileEffectIndex = 0;
         if (_data.towerIndex == 1)
             projectileEffectIndex = 1; // İkinci kule için farklı efekt
@@ -76,7 +80,9 @@ public class Tower : MonoBehaviour, IDamageable
         _healCooldown -= Time.deltaTime;
         if (_healCooldown > 0f) return;
 
-        Collider[] hits = Physics.OverlapSphere(transform.position, _data.range);
+        PlayEffects();
+
+        Collider[] hits = Physics.OverlapSphere(transform.position, _data.towerRange);
 
         foreach (var hit in hits)
         {
@@ -93,7 +99,7 @@ public class Tower : MonoBehaviour, IDamageable
             }
         }
 
-        _healCooldown = _data.healInterval;
+        _healCooldown = _data.supportInterval;
     }
 
     public void ReceiveHeal(int amount)
@@ -114,6 +120,17 @@ public class Tower : MonoBehaviour, IDamageable
         {
             Destroy(gameObject);
             Debug.Log("💥 Kule yok edildi!");
+        }
+    }
+
+    private void PlayEffects()
+    {
+        foreach (var effect in _effects)
+        {
+            if (effect != null)
+            {
+                effect.Play();
+            }
         }
     }
 }

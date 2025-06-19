@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [CreateAssetMenu(menuName = "Data/TowerData")]
 public class TowerData : ScriptableObject
@@ -9,15 +10,15 @@ public class TowerData : ScriptableObject
     public GameObject towerPrefab;
     public TowerType towerType;
     public int towerCost;
+    public float towerRange;
 
     [Header("Combat Tower")]
     public float fireRate;
-    public float range;
     public int damage;
 
     [Header("Support Tower")]
     public float healAmount;
-    public float healInterval;
+    public float supportInterval;
     public float slowDuration;
     public float slowAmount;
 }

@@ -18,10 +18,10 @@ MonoBehaviour:
   towerPrefab: {fileID: 5564737531901420564, guid: 4ace252d7db83994e8426b548f236c8c, type: 3}
   towerType: 1
   towerCost: 50
+  towerRange: 4
   fireRate: 0
-  range: 0
   damage: 0
   healAmount: 0
-  healInterval: 2
+  supportInterval: 3
   slowDuration: 3
-  slowAmount: 0.5
+  slowAmount: 0.25
