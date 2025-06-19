@@ -12,7 +12,7 @@ public class WaveManager : IInitializable
     private int _currentWave = -1;
     private int _enemiesRemaining = 0;
     private bool _waveInProgress = false;
-    
+
     public bool IsWaveInProgress => _waveInProgress;
 
 
@@ -44,6 +44,7 @@ public class WaveManager : IInitializable
         if (_currentWave >= _waves.Length)
         {
             Debug.Log("✅ Tüm dalgalar bitti!");
+            _uiManager.ShowWinPanel();
             return;
         }
 
@@ -65,7 +66,7 @@ public class WaveManager : IInitializable
             _waveInProgress = false;
             Debug.Log($"🌪 Wave {CurrentWave} tamamlandı!");
 
-            
+
             _spawner.StartCoroutine(WaitAndStartNextWave());
         }
     }

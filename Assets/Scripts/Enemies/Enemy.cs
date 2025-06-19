@@ -28,6 +28,11 @@ public class Enemy : MonoBehaviour, IDamageable
     [Inject(Id = "ProjectilePrefab")] private GameObject _projectilePrefab;
     public GameObject ProjectilePrefab => _projectilePrefab;
 
+    public bool IsDead => _isDead;
+    public int CurrentHealth => _currentHealth;
+    public Tower CurrentTargetTower => (_behavior as AttackerBehavior)?.CurrentTargetTower;
+
+
     public void SetWaveManager(WaveManager manager)
     {
         _waveManager = manager;
@@ -109,7 +114,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
         Debug.Log($"{gameObject.name} yavaşlatıldı: %{actualSlow * 100}");
     }
-    
+
 
     private void OnTriggerEnter(Collider other)
     {

@@ -13,6 +13,9 @@ public class AttackerBehavior : IEnemyBehavior
     private Tower _currentTarget;
     private float _attackCooldown = 1f;
     private float _timer;
+    
+    public Tower CurrentTargetTower => _currentTarget;
+
 
     public AttackerBehavior(Transform enemyTransform, Transform target, NavMeshAgent agent)
     {

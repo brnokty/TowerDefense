@@ -36,28 +36,51 @@ public class Tower : MonoBehaviour, IDamageable
 
         Collider[] hits = Physics.OverlapSphere(transform.position, _data.towerRange);
 
-        Enemy closestEnemy = null;
-        float closestDistance = Mathf.Infinity;
+        List<Enemy> targetingThisTower = new List<Enemy>();
+        List<Enemy> otherEnemies = new List<Enemy>();
 
         foreach (var hit in hits)
         {
             Enemy enemy = hit.GetComponent<Enemy>();
-            if (enemy == null) continue;
+            if (enemy == null || enemy.IsDead) continue;
 
-            float dist = Vector3.Distance(transform.position, enemy.transform.position);
-            if (dist < closestDistance)
+            if (enemy.CurrentTargetTower == this)
             {
-                closestDistance = dist;
-                closestEnemy = enemy;
+                targetingThisTower.Add(enemy);
+            }
+            else
+            {
+                otherEnemies.Add(enemy);
             }
         }
 
-        if (closestEnemy != null && _fireCooldown <= 0f)
+        List<Enemy> prioritizedList = targetingThisTower.Count > 0 ? targetingThisTower : otherEnemies;
+
+        Enemy selectedEnemy = null;
+        float lowestHealth = Mathf.Infinity;
+        float closestDistance = Mathf.Infinity;
+
+        foreach (var enemy in prioritizedList)
         {
-            Shoot(closestEnemy.transform);
+            float dist = Vector3.Distance(transform.position, enemy.transform.position);
+            int health = enemy.CurrentHealth;
+
+            if (health < lowestHealth ||
+                (health == lowestHealth && dist < closestDistance))
+            {
+                selectedEnemy = enemy;
+                lowestHealth = health;
+                closestDistance = dist;
+            }
+        }
+
+        if (selectedEnemy != null && _fireCooldown <= 0f)
+        {
+            Shoot(selectedEnemy.transform);
             _fireCooldown = 1f / _data.fireRate;
         }
     }
+
 
     private void Shoot(Transform target)
     {
