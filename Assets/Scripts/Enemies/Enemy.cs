@@ -99,9 +99,9 @@ public class Enemy : MonoBehaviour, IDamageable
         GetComponent<CapsuleCollider>().enabled = false;
         // transform.DORotate(new Vector3(0, 0, -90f), 0.5f);
 
-        _waveManager?.NotifyEnemyKilled(); // 👈
+        _waveManager?.NotifyEnemyKilled();
 
-        Destroy(gameObject, 1f);
+        Destroy(gameObject, 2f);
     }
 
 
@@ -121,8 +121,14 @@ public class Enemy : MonoBehaviour, IDamageable
         //base
         if (other.CompareTag("Base"))
         {
-            // _waveManager?.NotifyBaseAttacked(); // 👈
-            Die();
+            IDamageable damageable = other.GetComponent<IDamageable>();
+            if (damageable != null)
+            {
+                damageable.TakeDamage(_data.baseDamage);
+            }
+
+            _waveManager?.NotifyEnemyKilled();
+            Destroy(gameObject);
         }
     }
 }

@@ -932,6 +932,7 @@ MonoBehaviour:
   rangeTransform: {fileID: 712209928508134900}
   _healthBar: {fileID: 8730464650318527416}
   _data: {fileID: 0}
+  _effects: []
 --- !u!114 &8065847221991407228
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1144,7 +1145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBar: {fileID: 3133480983866859060}
-  castle: 0
+  castle: 1
 --- !u!1 &8022966062112321681
 GameObject:
   m_ObjectHideFlags: 0

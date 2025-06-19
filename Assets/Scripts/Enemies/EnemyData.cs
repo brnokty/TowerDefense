@@ -7,6 +7,7 @@ public class EnemyData : ScriptableObject
     public float speed;
     public int health;
     public int reward; // Öldüğünde vereceği coin
+    public int baseDamage; //basee değince verceği hasar
     public EnemyType type;
     
     [Header("Attacker Özellikleri")]

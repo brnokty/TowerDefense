@@ -36,6 +36,10 @@ public class Panel : MonoBehaviour
 
     public IEnumerator AppearRoutine()
     {
+        if(canvasGroup == null)
+        {
+            canvasGroup = GetComponent<CanvasGroup>();
+        }
         while (canvasGroup.alpha < 1)
         {
             canvasGroup.alpha += Time.deltaTime / appearTime;
@@ -63,6 +67,10 @@ public class Panel : MonoBehaviour
 
     public IEnumerator DisappearRoutine()
     {
+        if(canvasGroup == null)
+        {
+            canvasGroup = GetComponent<CanvasGroup>();
+        }
         while (canvasGroup.alpha > 0)
         {
             canvasGroup.alpha -= Time.deltaTime / disappearTime;

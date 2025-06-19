@@ -16,6 +16,7 @@ MonoBehaviour:
   speed: 3
   health: 50
   reward: 50
+  baseDamage: 15
   type: 1
   attackRange: 4
   attackRate: 1

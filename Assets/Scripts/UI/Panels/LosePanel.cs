@@ -6,7 +6,6 @@ public class LosePanel : Panel
     protected override void Start()
     {
         base.Start();
-        Initialize();
     }
 
     public override void Initialize()

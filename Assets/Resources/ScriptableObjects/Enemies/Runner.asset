@@ -16,6 +16,8 @@ MonoBehaviour:
   speed: 3
   health: 30
   reward: 25
+  baseDamage: 10
   type: 0
+  attackRange: 1.5
+  attackRate: 1
   slowSensitivity: 1
-  slowDuration: 1
