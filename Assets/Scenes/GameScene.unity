@@ -2701,6 +2701,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ab2d629bbaac56540ad9939edaba6131, type: 2}
   - {fileID: 11400000, guid: 31b38d67e732d3c4c973524a161502b0, type: 2}
   - {fileID: 11400000, guid: 593949f4ef2336347b0ae18dac722a98, type: 2}
+  - {fileID: 11400000, guid: 8ef3b5d2c84913d478aec34a195aa1f6, type: 2}
   projectilePrefab: {fileID: 65464542896376979, guid: 44b6be8e7b544564984c408149a5b27f, type: 3}
   enemyProjectilePrefab: {fileID: 0}
   towerDatas:
