@@ -3010,7 +3010,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waves:
-  - {fileID: 11400000, guid: 837b9a2cd5e10364794085170a066691, type: 2}
   - {fileID: 11400000, guid: 5a8f0fc10b7a93b4bbbf11a87b6b1ed5, type: 2}
   - {fileID: 11400000, guid: cc9fbcb6ef4c0ad469a33ba4335e3114, type: 2}
   - {fileID: 11400000, guid: ab2d629bbaac56540ad9939edaba6131, type: 2}
