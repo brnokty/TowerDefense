@@ -10,7 +10,7 @@ public class CoinManager : IInitializable
 
     public void Initialize()
     {
-        _coins = 500; 
+        _coins = 50; 
         _uiManager.SetCoin(_coins);
         Debug.Log($"💰 Başlangıç coin: {_coins}");
     }
