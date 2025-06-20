@@ -53,4 +53,9 @@ public class UIManager : IInitializable
         _winPanel.Disappear();
         _losePanel.Disappear();
     }
+    
+    public void SetTowerUIEnabled(bool enabled)
+    {
+        _inGamePanel.SetTowerTypePanel(enabled);
+    }
 }

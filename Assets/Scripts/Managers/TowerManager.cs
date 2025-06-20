@@ -15,6 +15,7 @@ public class TowerManager : ITickable
     private bool _canPlace = false;
     private float _placementTimer = 0f;
     private float _placementDuration = 5f;
+    [Inject] private UIManager _uiManager;
 
     public TowerManager(
         TowerData[] towerDatas,
@@ -34,6 +35,7 @@ public class TowerManager : ITickable
     {
         _placementTimer = _placementDuration;
         _canPlace = true;
+        _uiManager.SetTowerUIEnabled(true);
         Debug.Log("🛠 Kule yerleştirme başladı (5 saniye)");
     }
 
@@ -51,6 +53,7 @@ public class TowerManager : ITickable
             if (_placementTimer <= 0f)
             {
                 _canPlace = false;
+                _uiManager.SetTowerUIEnabled(false);
                 Debug.Log("🔔 Kule yerleştirme süresi bitti");
                 _waveManager.StartNextWave();
             }

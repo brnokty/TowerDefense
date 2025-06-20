@@ -11,6 +11,9 @@ public class InGamePanel : Panel
     [SerializeField] private GameObject towerButtonPrefab;
     [SerializeField] private Transform _context;
     [SerializeField] private Image selectedTowerImage;
+    [SerializeField] private GameObject towerBuyText;
+    [SerializeField] private CanvasGroup towerTypePanel;
+    
     [Inject] private TowerData[] _availableTowers;
     [Inject] private DiContainer _container;
 
@@ -60,5 +63,14 @@ public class InGamePanel : Panel
         _towerManager.SelectTower(towerIndex);
 
         selectedTowerImage.sprite = _availableTowers[towerIndex].towerSprite;
+    }
+    
+    
+    public void SetTowerTypePanel(bool value)
+    {
+        
+        towerTypePanel.interactable = value;
+        towerBuyText.SetActive(value);
+       
     }
 }

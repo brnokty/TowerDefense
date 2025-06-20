@@ -91,6 +91,9 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private void Die()
     {
+        if (_isDead)
+            return;
+
         _animator.SetTrigger("Die");
         _isDead = true;
         _coinManager.Earn(_data.reward);
@@ -118,6 +121,8 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private void OnTriggerEnter(Collider other)
     {
+        if (_isDead)
+            return;
         //base
         if (other.CompareTag("Base"))
         {
@@ -127,6 +132,7 @@ public class Enemy : MonoBehaviour, IDamageable
                 damageable.TakeDamage(_data.baseDamage);
             }
 
+            _isDead = true;
             _waveManager?.NotifyEnemyKilled();
             Destroy(gameObject);
         }
