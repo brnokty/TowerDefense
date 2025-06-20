@@ -36,7 +36,7 @@ public class EnemySpawner : MonoBehaviour
 
                 _container.Inject(enemy);
 
-                enemy.SetWaveManager(manager); // Enemy’ye WaveManager verilir
+                enemy.SetWaveManager(manager);
 
                 yield return new WaitForSeconds(waveData.spawnDelay);
             }

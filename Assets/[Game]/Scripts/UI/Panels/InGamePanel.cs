@@ -33,8 +33,7 @@ public class InGamePanel : Panel
     {
         waveText.text = wave.ToString();
     }
-
-    //Instantiates tower buttons based on available towers
+    
     public void UpdateTowerButtons(TowerData[] towers)
     {
         foreach (Transform child in _context)
@@ -44,7 +43,6 @@ public class InGamePanel : Panel
 
         if (towers == null || towers.Length == 0)
         {
-            Debug.LogWarning("No towers available to display.");
             return;
         }
 

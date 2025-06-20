@@ -12,7 +12,6 @@ public class CoinManager : IInitializable
     {
         _coins = 50; 
         _uiManager.SetCoin(_coins);
-        Debug.Log($"💰 Başlangıç coin: {_coins}");
     }
 
     public bool CanAfford(int amount)
@@ -24,13 +23,13 @@ public class CoinManager : IInitializable
     {
         _coins -= amount;
         _uiManager.SetCoin(_coins);
-        Debug.Log($"🪙 Harcandı: -{amount} → Kalan: {_coins}");
+        Debug.Log($"Harcandı: -{amount}, Kalan: {_coins}");
     }
 
     public void Earn(int amount)
     {
         _coins += amount;
         _uiManager.SetCoin(_coins);
-        Debug.Log($"💰 Kazanıldı: +{amount} → Toplam: {_coins}");
+        Debug.Log($"Kazanıldı: +{amount}, Toplam: {_coins}");
     }
 }

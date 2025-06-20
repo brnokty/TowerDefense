@@ -36,7 +36,7 @@ public class TowerManager : ITickable
         _placementTimer = _placementDuration;
         _canPlace = true;
         _uiManager.SetTowerUIEnabled(true);
-        Debug.Log("🛠 Kule yerleştirme başladı (5 saniye)");
+        Debug.Log("Kule yerleştirme başladı (5 saniye)");
     }
 
     public void Tick()
@@ -54,7 +54,7 @@ public class TowerManager : ITickable
             {
                 _canPlace = false;
                 _uiManager.SetTowerUIEnabled(false);
-                Debug.Log("🔔 Kule yerleştirme süresi bitti");
+                Debug.Log("Kule yerleştirme süresi bitti");
                 _waveManager.StartNextWave();
             }
         }
@@ -62,10 +62,8 @@ public class TowerManager : ITickable
 
     private void TryPlaceTower()
     {
-        // Eğer UI üzerine tıklanmışsa hiçbir şey yapma
         if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
         {
-            Debug.Log("⚠️ UI öğesi tıklanmış, kule yerleştirilemez.");
             return;
         }
 
@@ -76,14 +74,12 @@ public class TowerManager : ITickable
             return;
         }
 
-        // Raycast işlemi
+        // Raycast
         Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
-            // Sadece "Platform" tagli objelere yerleştirilsin
             if (!hit.collider.CompareTag("Platform"))
             {
-                Debug.Log("⛔ Platform dışında bir yere tıklanmış.");
                 return;
             }
 
@@ -92,7 +88,6 @@ public class TowerManager : ITickable
 
             if (isWalkable)
             {
-                Debug.Log("⛔ Yürünebilen bir yere tıklanmış.");
                 return;
             }
 
@@ -108,11 +103,10 @@ public class TowerManager : ITickable
             );
             tower._data = _selectedTowerData;
 
-            _container.Inject(tower); // Inject işlemi
+            _container.Inject(tower);
 
             // Para harcama
             _coinManager.Spend(_selectedTowerData.towerCost);
-            Debug.Log($"🏰 {_selectedTowerData.towerName} yerleştirildi: {position}");
         }
     }
 
@@ -121,7 +115,7 @@ public class TowerManager : ITickable
         if (index >= 0 && index < _towerDatas.Length)
         {
             _selectedTowerData = _towerDatas[index];
-            Debug.Log($"✅ Seçilen kule: {_selectedTowerData.towerName}");
+            Debug.Log($"seçilen kule: {_selectedTowerData.towerName}");
         }
     }
 

@@ -137,12 +137,12 @@ public class Tower : MonoBehaviour, IDamageable
     {
         _currentHealth -= amount;
         _healthBar.HealthBarUpdate(100, _currentHealth);
-        Debug.Log($"🏰 Kule hasar aldı: {_currentHealth}");
+        Debug.Log($"Kule hasar aldı: {_currentHealth}");
 
         if (_currentHealth <= 0)
         {
             Destroy(gameObject);
-            Debug.Log("💥 Kule yok edildi!");
+            Debug.Log("Kule yok edildi");
         }
     }
 

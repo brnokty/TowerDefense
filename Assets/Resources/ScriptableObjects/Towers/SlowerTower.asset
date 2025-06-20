@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SlowerTower
   m_EditorClassIdentifier: 
   towerIndex: 3
-  towerName: Healler Tower
+  towerName: Slower Tower
   towerSprite: {fileID: 21300000, guid: 45847d3eb83292c48baeee045f32e413, type: 3}
   towerPrefab: {fileID: 5564737531901420564, guid: 4ace252d7db83994e8426b548f236c8c, type: 3}
   towerType: 1

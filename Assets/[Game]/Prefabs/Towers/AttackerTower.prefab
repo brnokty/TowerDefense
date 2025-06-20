@@ -1145,7 +1145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBar: {fileID: 3133480983866859060}
-  castle: 1
+  castle: 0
 --- !u!1 &8022966062112321681
 GameObject:
   m_ObjectHideFlags: 0

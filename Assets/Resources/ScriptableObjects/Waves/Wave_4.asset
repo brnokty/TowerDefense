@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34e3d37e9d4d10c4d94db58b2d55cb14, type: 3}
   m_Name: Wave_4
   m_EditorClassIdentifier: 
-  waveName: Wave 2
   enemyTypes:
-  - {fileID: 11400000, guid: 656a49a2456923f4fb971ecb45ba029b, type: 2}
-  enemyCounts: 03000000
+  - {fileID: 11400000, guid: d4e7d6c6586b2b44e856858cefe7109c, type: 2}
+  - {fileID: 11400000, guid: 570aeb27560123942adb50f17311f08d, type: 2}
+  - {fileID: 11400000, guid: d4e7d6c6586b2b44e856858cefe7109c, type: 2}
+  enemyCounts: 020000000200000002000000
   spawnDelay: 0.7

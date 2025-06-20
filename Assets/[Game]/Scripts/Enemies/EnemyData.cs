@@ -15,7 +15,7 @@ public class EnemyData : ScriptableObject
     public float attackRate = 1f; 
 
     [Header("Support Tower Etkileri")]
-    public float slowSensitivity = 1f;    // 1 = tam etkilenir, 0.5 = %50 etkilenir
+    public float slowSensitivity = 1f;    
 }
 
 

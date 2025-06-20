@@ -60,7 +60,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
         _behavior?.Tick();
 
-        // slow etkisi bitti mi?
+        
         if (_slowTimer > 0)
         {
             _slowTimer -= Time.deltaTime;

@@ -14,28 +14,27 @@ public class WaveController : MonoBehaviour
 
     private IEnumerator GameLoop()
     {
-        yield return new WaitForSeconds(1f); // İlk geçiş için bekleme
+        yield return new WaitForSeconds(1f); 
 
         while (!_waveManager.AllWavesCompleted)
         {
             // 5 saniyelik kule yerleştirme süresi
             _towerManager.StartPlacementPhase();
-            Debug.Log("🛠 Yerleştirme süresi başladı");
+            Debug.Log("Yerleştirme süresi başladı");
 
             yield return new WaitForSeconds(5f);
 
             // Wave başlasın
             _waveManager.StartNextWave();
-
-            // Bekleme waveManager'da yapılır (hepsi ölene kadar)
+            
             while (_waveManager.IsWaveInProgress)
             {
                 yield return null;
             }
 
-            yield return new WaitForSeconds(2f); // İsteğe bağlı wave arası bekleme
+            yield return new WaitForSeconds(2f);
         }
 
-        Debug.Log("🏁 Oyun tamamlandı!");
+        Debug.Log("Oyun tamamlandı!");
     }
 }

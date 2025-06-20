@@ -42,7 +42,6 @@ public class AttackerBehavior : IEnemyBehavior
         }
         else
         {
-            // Kule hâlâ hayattaysa
             if (!_agent.isStopped)
             {
                 _agent.isStopped = true;
@@ -86,7 +85,7 @@ public class AttackerBehavior : IEnemyBehavior
     {
         if (_currentTarget == null) return;
 
-        // Kuleye yönel
+        // Kuleye bak
         Vector3 direction = _currentTarget.transform.position - _enemyTransform.position;
         direction.y = 0f;
 

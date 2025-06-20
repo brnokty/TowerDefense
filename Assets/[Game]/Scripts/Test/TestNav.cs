@@ -3,7 +3,7 @@ using UnityEngine.AI;
 
 public class TestNav : MonoBehaviour
 {
-    [SerializeField] private Transform target; // Gidilecek hedef
+    [SerializeField] private Transform target;
     private NavMeshAgent agent;
 
     private void Start()

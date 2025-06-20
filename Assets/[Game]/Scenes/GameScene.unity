@@ -3016,6 +3016,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 31b38d67e732d3c4c973524a161502b0, type: 2}
   - {fileID: 11400000, guid: 593949f4ef2336347b0ae18dac722a98, type: 2}
   - {fileID: 11400000, guid: 8ef3b5d2c84913d478aec34a195aa1f6, type: 2}
+  - {fileID: 11400000, guid: e31aa6e15875c754aaa3178d31eedda0, type: 2}
+  - {fileID: 11400000, guid: 1c2b0103c0000a14dae3bc996535fe8d, type: 2}
   projectilePrefab: {fileID: 65464542896376979, guid: 44b6be8e7b544564984c408149a5b27f, type: 3}
   towerDatas:
   - {fileID: 11400000, guid: fed7948093c6b5a40898c0328317e5fc, type: 2}
@@ -4521,11 +4523,11 @@ SceneRoots:
   m_Roots:
   - {fileID: 963194228}
   - {fileID: 705507995}
+  - {fileID: 1742788208}
+  - {fileID: 793386517}
   - {fileID: 1687123013}
   - {fileID: 1908907110}
   - {fileID: 1633072485}
   - {fileID: 5580595457373545665}
   - {fileID: 8390758674847995134}
-  - {fileID: 1742788208}
-  - {fileID: 793386517}
   - {fileID: 1544458020}

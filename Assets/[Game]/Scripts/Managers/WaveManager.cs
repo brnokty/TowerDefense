@@ -32,7 +32,7 @@ public class WaveManager : IInitializable
 
     public void Initialize()
     {
-        Debug.Log("📦 WaveManager initialized");
+        Debug.Log("WaveManager initialized");
         //StartNextWave();
         _towerManager.StartPlacementPhase();
     }
@@ -43,7 +43,7 @@ public class WaveManager : IInitializable
 
         if (_currentWave >= _waves.Length)
         {
-            Debug.Log("✅ Tüm dalgalar bitti!");
+            Debug.Log("Tüm dalgalar bitti");
             _uiManager.ShowWinPanel();
             return;
         }
@@ -64,7 +64,7 @@ public class WaveManager : IInitializable
         if (_enemiesRemaining <= 0 && _waveInProgress)
         {
             _waveInProgress = false;
-            Debug.Log($"🌪 Wave {CurrentWave} tamamlandı!");
+            Debug.Log($"Wave {CurrentWave} tamamlandı");
 
 
             _spawner.StartCoroutine(WaitAndStartNextWave());
