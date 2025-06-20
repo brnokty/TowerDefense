@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.EventSystems;
 using Zenject;
 
@@ -77,9 +78,18 @@ public class TowerManager : ITickable
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
             // Sadece "Platform" tagli objelere yerleştirilsin
-            if (hit.collider.tag != "Platform")
+            if (!hit.collider.CompareTag("Platform"))
             {
                 Debug.Log("⛔ Platform dışında bir yere tıklanmış.");
+                return;
+            }
+
+
+            bool isWalkable = IsPositionOnNavMesh(hit.point);
+
+            if (isWalkable)
+            {
+                Debug.Log("⛔ Yürünebilen bir yere tıklanmış.");
                 return;
             }
 
@@ -110,5 +120,11 @@ public class TowerManager : ITickable
             _selectedTowerData = _towerDatas[index];
             Debug.Log($"✅ Seçilen kule: {_selectedTowerData.towerName}");
         }
+    }
+
+    private bool IsPositionOnNavMesh(Vector3 position)
+    {
+        NavMeshHit navHit;
+        return NavMesh.SamplePosition(position, out navHit, 1f, NavMesh.AllAreas);
     }
 }

@@ -8,6 +8,7 @@ TagManager:
   - Tower
   - Base
   - Platform
+  - Road
   layers:
   - Default
   - TransparentFX
